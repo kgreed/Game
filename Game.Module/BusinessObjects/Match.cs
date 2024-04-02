@@ -8,38 +8,24 @@ using System.Linq;
 
 namespace Game.Module.BusinessObjects
 {
-     
     [DefaultClassOptions]
-     
     public class Match : BaseObject, IObjectSpaceLink
     {
-        public Match()
-        {
-            // In the constructor, initialize collection properties, e.g.: 
-            this.MatchPlayers = new ObservableCollection<MatchPlayer>();
-        }
-
+        public Match() { this.MatchPlayers = new ObservableCollection<MatchPlayer>(); }
         public virtual string Name { get; set; }
 
         public override void OnLoaded()
         {
             base.OnLoaded();
             Spectators = MatchPlayers.Where(mp => mp.TeamId == (int)TeamEnum.Spectator)
-                .Select(mp => new SpectatorMatchPlayer { Player = mp.Player, ID = mp.ID, Match = this })
+                .Select(mp => mp.DuplicateSpectator())
                 .ToList();
-
-
             RedPlayers = MatchPlayers.Where(mp => mp.TeamId == (int)TeamEnum.Red)
-               .Select(mp => new RedMatchPlayer(  ) { Player = mp.Player, ID = mp.ID, Match = this })
-               .ToList();
-
-
+                .Select(mp => mp.DuplicateRed())
+                .ToList();
             BluePlayers = MatchPlayers.Where(mp => mp.TeamId == (int)TeamEnum.Blue)
-           .Select(mp => new BlueMatchPlayer { Player = mp.Player, ID=mp.ID, Match = this })
-           .ToList();
-
-
-
+                .Select(mp => mp.DuplicateBlue())
+                .ToList();
         }
 
         public virtual IList<MatchPlayer> MatchPlayers { get; set; }
@@ -49,7 +35,6 @@ namespace Game.Module.BusinessObjects
         public virtual IList<RedMatchPlayer> RedPlayers { get; set; }
         [NotMapped]
         public virtual IList<BlueMatchPlayer> BluePlayers { get; set; }
-
         [Action(Caption = "Add Missing", ImageName = "Attention", AutoCommit = true)]
         public void ActionMethod()
         {
@@ -62,14 +47,11 @@ namespace Game.Module.BusinessObjects
                 matchPlayer.Match = this;
                 matchPlayer.Player = player;
                 matchPlayer.TeamId = (int) TeamEnum.Spectator;
-                 
                 MatchPlayers.Add(matchPlayer);
             }
             ObjectSpace.CommitChanges();
             // refresh detail view
             ObjectSpace.Refresh();
         }
-
-
     }
 } 
