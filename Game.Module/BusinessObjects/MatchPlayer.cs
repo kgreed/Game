@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Game.Module.BusinessObjects
 {
+  
     public class MatchPlayer : BaseObject
     {
         public MatchPlayer()

@@ -45,5 +45,8 @@ public class GameEFCoreDbContext : DbContext {
 
 		// In MatchPlayer the combination of Match and Player should be unique
 	 	//modelBuilder.Entity<MatchPlayer>().HasIndex(mp => new { mp.Match, mp.Player }).IsUnique();
+		// set up relationship between player and preferredplayer1 one or none
+		// allow none
+		modelBuilder.Entity<Player>().HasOne(p => p.PreferredPlayer1).WithOne().HasForeignKey<Player>(p => p.PreferredPlayer1Guid);
     }
 }
