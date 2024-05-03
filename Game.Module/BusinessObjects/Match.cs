@@ -28,6 +28,9 @@ namespace Game.Module.BusinessObjects
                 .ToList();
         }
 
+        //public virtual Guid? BlueTankPlayerId { get; set; }
+        //[ForeignKey("BlueTankPlayerId")]
+       // public virtual Player BlueTankPlayer { get; set; }
         public virtual IList<MatchPlayer> MatchPlayers { get; set; }
         [NotMapped]
         public virtual IList<SpectatorMatchPlayer> Spectators { get; set; }
