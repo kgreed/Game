@@ -12,7 +12,7 @@ namespace Game.Module.BusinessObjects
     [DefaultClassOptions]
     public class Player : BaseObject
     {
-        public Player() { this.Matches = new ObservableCollection<MatchPlayer>(); }
+        public Player() { this.Matches = []; }
         public virtual string Name { get; set; }
         public virtual IList<MatchPlayer> Matches { get; set; }
 

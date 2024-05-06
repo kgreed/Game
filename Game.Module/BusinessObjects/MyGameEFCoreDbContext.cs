@@ -6,7 +6,7 @@ namespace Game.Module.BusinessObjects
     [TypesInfoInitializer(typeof(MyGameContextInitializer))]
     public class MyGameEFCoreDbContext : DbContext
     {
-        public MyGameEFCoreDbContext(DbContextOptions<GameEFCoreDbContext> options) : base(options)
+        public MyGameEFCoreDbContext(DbContextOptions<MyGameEFCoreDbContext> options) : base(options)
         {
         }
         //public DbSet<ModuleInfo> ModulesInfo { get; set; }
@@ -16,7 +16,7 @@ namespace Game.Module.BusinessObjects
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
+            //modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
             modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
 
             // In MatchPlayer the combination of Match and Player should be unique

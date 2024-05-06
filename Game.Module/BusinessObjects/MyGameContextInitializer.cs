@@ -7,7 +7,7 @@ namespace Game.Module.BusinessObjects
     {
         protected override DbContext CreateDbContext()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<GameEFCoreDbContext>()
+            var optionsBuilder = new DbContextOptionsBuilder<MyGameEFCoreDbContext>()
                 .UseSqlServer(";");
     
 

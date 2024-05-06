@@ -9,7 +9,7 @@ using System.Linq;
 namespace Game.Module.BusinessObjects
 {
     [DefaultClassOptions]
-    public class Match : BaseObject, IObjectSpaceLink
+    public class Match : BaseObject //, IObjectSpaceLink
     {
         public Match() { this.MatchPlayers = new ObservableCollection<MatchPlayer>(); }
         public virtual string Name { get; set; }

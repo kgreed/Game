@@ -10,7 +10,7 @@ namespace Game.Module.Functions
         public MyGameEFCoreDbContext MyCreateMyDbContext(string connectionString)
         {
             
-            var optionsBuilder = new DbContextOptionsBuilder<GameEFCoreDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<MyGameEFCoreDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
             //optionsBuilder.UseChangeTrackingProxies();
             //optionsBuilder.UseObjectSpaceLinkProxies();
@@ -19,8 +19,7 @@ namespace Game.Module.Functions
 
         public void TestAdd(string connectionString)
         {
-            try
-            {
+            
                 var dbContext = MyCreateMyDbContext(connectionString);
 
                 var player = new Player
@@ -32,12 +31,7 @@ namespace Game.Module.Functions
                 dbContext.SaveChanges();
                 var count = dbContext.Players.Count();
                 Debug.Print($"There are now {count} players");
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.ToString());
-
-            }
+            
             
         }
     }
